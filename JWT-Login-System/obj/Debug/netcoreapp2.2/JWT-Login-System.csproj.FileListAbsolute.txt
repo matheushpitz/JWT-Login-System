@@ -1,0 +1,17 @@
+C:\workspace\study\jwt-login-system\JWT-Login-System\bin\Debug\netcoreapp2.2\JWT-Login-System.deps.json
+C:\workspace\study\jwt-login-system\JWT-Login-System\bin\Debug\netcoreapp2.2\JWT-Login-System.runtimeconfig.json
+C:\workspace\study\jwt-login-system\JWT-Login-System\bin\Debug\netcoreapp2.2\JWT-Login-System.runtimeconfig.dev.json
+C:\workspace\study\jwt-login-system\JWT-Login-System\bin\Debug\netcoreapp2.2\JWT-Login-System.dll
+C:\workspace\study\jwt-login-system\JWT-Login-System\bin\Debug\netcoreapp2.2\JWT-Login-System.pdb
+C:\workspace\study\jwt-login-system\JWT-Login-System\bin\Debug\netcoreapp2.2\App.dll
+C:\workspace\study\jwt-login-system\JWT-Login-System\bin\Debug\netcoreapp2.2\App.pdb
+C:\workspace\study\jwt-login-system\JWT-Login-System\obj\Debug\netcoreapp2.2\JWT-Login-System.csprojAssemblyReference.cache
+C:\workspace\study\jwt-login-system\JWT-Login-System\obj\Debug\netcoreapp2.2\JWT-Login-System.csproj.CoreCompileInputs.cache
+C:\workspace\study\jwt-login-system\JWT-Login-System\obj\Debug\netcoreapp2.2\JWT-Login-System.RazorAssemblyInfo.cache
+C:\workspace\study\jwt-login-system\JWT-Login-System\obj\Debug\netcoreapp2.2\JWT-Login-System.RazorAssemblyInfo.cs
+C:\workspace\study\jwt-login-system\JWT-Login-System\obj\Debug\netcoreapp2.2\JWT-Login-System.AssemblyInfoInputs.cache
+C:\workspace\study\jwt-login-system\JWT-Login-System\obj\Debug\netcoreapp2.2\JWT-Login-System.AssemblyInfo.cs
+C:\workspace\study\jwt-login-system\JWT-Login-System\obj\Debug\netcoreapp2.2\JWT-Login-System.RazorTargetAssemblyInfo.cache
+C:\workspace\study\jwt-login-system\JWT-Login-System\obj\Debug\netcoreapp2.2\JWT-Login-System.csproj.CopyComplete
+C:\workspace\study\jwt-login-system\JWT-Login-System\obj\Debug\netcoreapp2.2\JWT-Login-System.dll
+C:\workspace\study\jwt-login-system\JWT-Login-System\obj\Debug\netcoreapp2.2\JWT-Login-System.pdb
