@@ -40,8 +40,22 @@ namespace JWT_Login_System
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new Info {
                     Version = "V1",
-                    Title = "JWT Login"
-                });                
+                    Title = "JWT Login"                    
+                });
+
+                var security = new Dictionary<string, IEnumerable<string>>
+                {
+                    {"Bearer", new string[] { }},
+                };
+
+                c.AddSecurityDefinition("Bearer", new ApiKeyScheme {
+                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                    Name = "Authorization",
+                    In = "header",
+                    Type = "apiKey"
+                });
+
+                c.AddSecurityRequirement(security);
             });
 
             var key = Encoding.ASCII.GetBytes(settings.GetJWTKey());
@@ -78,7 +92,7 @@ namespace JWT_Login_System
 
             app.UseSwagger();
             app.UseSwaggerUI(c => {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "JWT Login");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "JWT Login");                
             });
         }
 
@@ -89,6 +103,7 @@ namespace JWT_Login_System
             services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddScoped<ILoginService, LoginService>();
+            services.AddScoped<IUserService, UserService>();
         }
     }
 }

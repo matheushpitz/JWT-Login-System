@@ -22,8 +22,11 @@ namespace App.Services.implementations
             this._settings = settings;
         }
 
-        public User AuthenticateAsync(User user)
+        public string AuthenticateAsync(User user)
         {
+
+            string jwtToken = null;
+
             User data = this._repository.GetUserByCredentialsAsync(user);
 
             if(data != null)
@@ -34,17 +37,18 @@ namespace App.Services.implementations
                 {
                     Subject = new ClaimsIdentity(new Claim[]
                     {
-                    new Claim(ClaimTypes.Name, "user")
+                    new Claim(ClaimTypes.Name, data.Name),
+                    new Claim(ClaimTypes.Role, data.Role)
                     }),
                     Expires = DateTime.UtcNow.AddDays(7),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
                 };
                 var token = tokenHandler.CreateToken(tokenDescriptor);
-                var token2 = tokenHandler.WriteToken(token);
+                jwtToken = tokenHandler.WriteToken(token);
 
             }
 
-            return data;
-        }
+            return jwtToken;
+        }        
     }
 }
