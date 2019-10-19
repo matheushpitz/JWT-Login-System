@@ -6,7 +6,7 @@ namespace App.Repositories.interfaces
 {
     public interface IUserRepository
     {
-        User GetUserByCredentialsAsync(User user);
+        User GetUserByCredentials(User user);
         User GetUserByUsername(string username);
         IEnumerable<User> GetAllUsers();
     }

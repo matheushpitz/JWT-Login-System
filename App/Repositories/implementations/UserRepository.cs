@@ -21,17 +21,17 @@ namespace App.Repositories.implementations
 
         public IEnumerable<User> GetAllUsers()
         {
-            return this._users;
+            return this._users.Select(u => u.GetSafeInstance());
         }
 
-        public User GetUserByCredentialsAsync(User user)
+        public User GetUserByCredentials(User user)
         {
-            return this._users.Where(u => u.Username.Equals(user.Username) && u.Password.Equals(user.Password)).FirstOrDefault();
+            return this._users.Where(u => u.Username.Equals(user.Username) && u.Password.Equals(user.Password)).FirstOrDefault().GetSafeInstance();
         }
 
         public User GetUserByUsername(string username)
-        {
-            return this._users.Where(u => u.Username.Equals(username)).FirstOrDefault();
+        {            
+            return this._users.Where(u => u.Username.Equals(username)).FirstOrDefault().GetSafeInstance();
         }        
     }
 }

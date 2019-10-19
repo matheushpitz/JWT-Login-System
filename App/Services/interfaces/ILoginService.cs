@@ -8,6 +8,6 @@ namespace App.Services.interfaces
 {
     public interface ILoginService
     {
-        string AuthenticateAsync(User user);        
+        string Authenticate(User user);        
     }
 }

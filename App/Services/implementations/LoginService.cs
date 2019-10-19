@@ -22,28 +22,33 @@ namespace App.Services.implementations
             this._settings = settings;
         }
 
-        public string AuthenticateAsync(User user)
+        public string Authenticate(User user)
         {
 
             string jwtToken = null;
 
-            User data = this._repository.GetUserByCredentialsAsync(user);
+            User data = this._repository.GetUserByCredentials(user);
 
             if(data != null)
             {
+                // Create Token Handler
                 var tokenHandler = new JwtSecurityTokenHandler();
-                var key = Encoding.ASCII.GetBytes(this._settings.GetJWTKey());
+                // Get Jwt Security Key.
+                var key = Encoding.ASCII.GetBytes(this._settings.GetJwtSecurityKey());
+                // Create Token Descriptor.
                 var tokenDescriptor = new SecurityTokenDescriptor
                 {
                     Subject = new ClaimsIdentity(new Claim[]
                     {
-                    new Claim(ClaimTypes.Name, data.Name),
+                    new Claim(ClaimTypes.Name, data.Username),
                     new Claim(ClaimTypes.Role, data.Role)
                     }),
-                    Expires = DateTime.UtcNow.AddDays(7),
+                    Expires = DateTime.UtcNow.AddHours(1),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
                 };
+                // Create the Token as JSON.
                 var token = tokenHandler.CreateToken(tokenDescriptor);
+                // Serialize the JSON.
                 jwtToken = tokenHandler.WriteToken(token);
 
             }

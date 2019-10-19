@@ -8,4 +8,3 @@ C:\workspace\study\jwt-login-system\App\obj\Debug\netcoreapp2.2\App.dll
 C:\workspace\study\jwt-login-system\App\obj\Debug\netcoreapp2.2\App.pdb
 C:\workspace\study\jwt-login-system\App\bin\Debug\netcoreapp2.2\App.runtimeconfig.json
 C:\workspace\study\jwt-login-system\App\bin\Debug\netcoreapp2.2\App.runtimeconfig.dev.json
-C:\workspace\study\jwt-login-system\App\obj\Debug\netcoreapp2.2\App.csprojAssemblyReference.cache

@@ -33,10 +33,11 @@ namespace JWT_Login_System
         public void ConfigureServices(IServiceCollection services)
         {            
             this.Register(services);
-
+            // Get AppSettings Instance
             IAppSettings settings = services.BuildServiceProvider().GetService<IAppSettings>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            // Add Swagger with Security Definition.
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new Info {
                     Version = "V1",
@@ -49,7 +50,7 @@ namespace JWT_Login_System
                 };
 
                 c.AddSecurityDefinition("Bearer", new ApiKeyScheme {
-                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                    Description = "JWT Authorization (Example: 'Bearer <token>')",
                     Name = "Authorization",
                     In = "header",
                     Type = "apiKey"
@@ -57,9 +58,9 @@ namespace JWT_Login_System
 
                 c.AddSecurityRequirement(security);
             });
-
-            var key = Encoding.ASCII.GetBytes(settings.GetJWTKey());
-
+            // Get the JWT Security Key and convert it to a byte array.
+            byte[] key = Encoding.ASCII.GetBytes(settings.GetJwtSecurityKey());
+            // Add Authentication
             services.AddAuthentication(a => 
             {
                 a.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -85,11 +86,11 @@ namespace JWT_Login_System
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            // Use Authentication
             app.UseAuthentication();
 
             app.UseMvc();
-
+            // Use Swagger
             app.UseSwagger();
             app.UseSwaggerUI(c => {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "JWT Login");                

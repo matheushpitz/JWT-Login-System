@@ -7,6 +7,6 @@ namespace config.interfaces
 {
     public interface IAppSettings
     {
-        string GetJWTKey();
+        string GetJwtSecurityKey();
     }
 }

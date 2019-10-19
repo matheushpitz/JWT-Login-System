@@ -6,16 +6,16 @@ namespace config.implementations
     public class AppSettings : IAppSettings
     {
 
-        public readonly string JWTKey;
+        private readonly string JwtSecurityKey;
 
         public AppSettings(IConfiguration configuration)
         {
-            this.JWTKey = configuration.GetSection("jwt:key").Value;
+            this.JwtSecurityKey = configuration.GetSection("JWT:securityKey").Value;
         }
 
-        public string GetJWTKey()
+        public string GetJwtSecurityKey()
         {
-            return this.JWTKey;
+            return this.JwtSecurityKey;
         }
     }
 }
