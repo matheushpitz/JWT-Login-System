@@ -43,6 +43,26 @@ namespace Controllers
             }
         }
 
+        [HttpPost("Reauthenticate")]
+        public IActionResult Reauthenticate() {
+            try
+            {
+                return Ok(new
+                {
+                    token = this._login.Reauthenticate(this.HttpContext),
+                    success = true
+                });
+            }
+            catch (Exception e)
+            {
+                return Ok(new
+                {
+                    success = false,
+                    message = e.Message
+                });
+            }
+        }
+
         // Administrator and Users can use this GET.
         [Authorize(Roles = Roles.ADMIN + "," + Roles.USER)]
         [HttpGet("GetUserData")]

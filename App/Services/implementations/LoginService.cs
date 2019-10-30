@@ -7,6 +7,8 @@ using System;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
 using config.interfaces;
+using Microsoft.AspNetCore.Http;
+using System.Linq;
 
 namespace App.Services.implementations
 {
@@ -31,29 +33,38 @@ namespace App.Services.implementations
 
             if(data != null)
             {
-                // Create Token Handler
-                var tokenHandler = new JwtSecurityTokenHandler();
-                // Get Jwt Security Key.
-                var key = Encoding.ASCII.GetBytes(this._settings.GetJwtSecurityKey());
-                // Create Token Descriptor.
-                var tokenDescriptor = new SecurityTokenDescriptor
-                {
-                    Subject = new ClaimsIdentity(new Claim[]
-                    {
-                    new Claim(ClaimTypes.Name, data.Username),
-                    new Claim(ClaimTypes.Role, data.Role)
-                    }),
-                    Expires = DateTime.UtcNow.AddHours(1),
-                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-                };
-                // Create the Token as JSON.
-                var token = tokenHandler.CreateToken(tokenDescriptor);
-                // Serialize the JSON.
-                jwtToken = tokenHandler.WriteToken(token);
+                jwtToken = this.generateJwt(data.Username, data.Role);
 
             }
 
             return jwtToken;
-        }        
+        }
+
+        public string Reauthenticate(HttpContext context)
+        {
+            return this.generateJwt(context.User.Identity.Name, context.User.Claims.Where(c => c.Type == ClaimTypes.Role).FirstOrDefault().Value);
+        }
+
+        private string generateJwt(string username, string role) {
+            // Create Token Handler
+            var tokenHandler = new JwtSecurityTokenHandler();
+            // Get Jwt Security Key.
+            var key = Encoding.ASCII.GetBytes(this._settings.GetJwtSecurityKey());
+            // Create Token Descriptor.
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Name, username),
+                    new Claim(ClaimTypes.Role, role)
+                }),
+                Expires = DateTime.UtcNow.AddHours(1),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            // Create the Token as JSON.
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            // Serialize the JSON.
+            return tokenHandler.WriteToken(token);
+        }
     }
 }
