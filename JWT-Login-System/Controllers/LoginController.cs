@@ -31,7 +31,10 @@ namespace Controllers
             {
                 return Ok(new
                 {
-                    token = this._login.Authenticate(user),
+                    data = new
+                    {
+                        token = this._login.Authenticate(user)
+                    },
                     success = true
                 });
             } catch(Exception e) {

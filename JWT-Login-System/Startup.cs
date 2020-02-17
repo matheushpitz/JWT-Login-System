@@ -36,7 +36,11 @@ namespace JWT_Login_System
             // Get AppSettings Instance
             IAppSettings settings = services.BuildServiceProvider().GetService<IAppSettings>();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddCors(options => {
+                options.AddPolicy("CORSPolicy", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials());
+            });
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);            
             // Add Swagger with Security Definition.
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new Info {
@@ -86,8 +90,10 @@ namespace JWT_Login_System
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors("CORSPolicy");
             // Use Authentication
-            app.UseAuthentication();
+            app.UseAuthentication();            
 
             app.UseMvc();
             // Use Swagger

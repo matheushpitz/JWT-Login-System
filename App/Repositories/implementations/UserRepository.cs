@@ -26,12 +26,20 @@ namespace App.Repositories.implementations
 
         public User GetUserByCredentials(User user)
         {
-            return this._users.Where(u => u.Username.Equals(user.Username) && u.Password.Equals(user.Password)).FirstOrDefault().GetSafeInstance();
+            IEnumerable<User> users = this._users.Where(u => u.Username.Equals(user.Username) && u.Password.Equals(user.Password));
+            if(users.Count() > 0)
+                return users.FirstOrDefault().GetSafeInstance();
+
+            return null;
         }
 
         public User GetUserByUsername(string username)
-        {            
-            return this._users.Where(u => u.Username.Equals(username)).FirstOrDefault().GetSafeInstance();
+        {
+            IEnumerable<User> users = this._users.Where(u => u.Username.Equals(username));
+            if(users.Count() > 0)
+                return users.FirstOrDefault().GetSafeInstance();
+
+            return null;
         }        
     }
 }
