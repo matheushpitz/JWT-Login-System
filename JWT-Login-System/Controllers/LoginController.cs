@@ -52,7 +52,9 @@ namespace Controllers
             {
                 return Ok(new
                 {
-                    token = this._login.Reauthenticate(this.HttpContext),
+                    data = new {
+                        token = this._login.Reauthenticate(this.HttpContext)
+                    },                    
                     success = true
                 });
             }
